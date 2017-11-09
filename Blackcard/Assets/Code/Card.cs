@@ -7,6 +7,7 @@ public class Card : MonoBehaviour
     string name;
     int lands;
     Effect effect;
+    bool mustForcePlay;
 
 	// Use this for initialization
 	void Start () 
@@ -21,6 +22,11 @@ public class Card : MonoBehaviour
 	}
 
     public void ForcePlay()
+    {
+
+    }
+
+    public void ActivateEffect()
     {
 
     }

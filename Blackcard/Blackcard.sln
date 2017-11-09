@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blackcard.CSharp", "Blackcard.CSharp.csproj", "{F26FCB85-AC0B-FC26-01C8-85D08793D58C}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blackcard", "Assembly-CSharp.csproj", "{B6598929-E860-9DA7-3858-1D292D1D4A07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F26FCB85-AC0B-FC26-01C8-85D08793D58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F26FCB85-AC0B-FC26-01C8-85D08793D58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F26FCB85-AC0B-FC26-01C8-85D08793D58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F26FCB85-AC0B-FC26-01C8-85D08793D58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6598929-E860-9DA7-3858-1D292D1D4A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6598929-E860-9DA7-3858-1D292D1D4A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6598929-E860-9DA7-3858-1D292D1D4A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6598929-E860-9DA7-3858-1D292D1D4A07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
