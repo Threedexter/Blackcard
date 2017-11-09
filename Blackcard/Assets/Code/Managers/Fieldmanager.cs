@@ -11,7 +11,10 @@ public class Fieldmanager : MonoBehaviour
     public GameObject loot;
     public GameObject wall;
 
-    public List<Material> planes = new List<Material>();
+    public List<Texture> grassPlanes = new List<Texture>();
+    public List<Texture> marshPlanes = new List<Texture>();
+    public List<Texture> mountainPlanes = new List<Texture>();
+    public List<Texture> ruinsPlanes = new List<Texture>();
 
     private Dictionary<Vector2, Land> lands = new Dictionary<Vector2, Land>();
 
