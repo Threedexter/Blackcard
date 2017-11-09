@@ -140,7 +140,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 114197177962162546, guid: ad28e3e400f56e74d8bf48609b47cec2, type: 2}
+  enemy: {fileID: 0}
+  loot: {fileID: 1413475532634504, guid: c213b17968752a44bac5218f1a4223e6, type: 2}
   wall: {fileID: 1029266723173854, guid: 2ecf71d9afe7bda4da882fa7c0b7859a, type: 2}
+  planes:
+  - {fileID: 2100000, guid: 2d080a9bc75c23240a156c50d04fe633, type: 2}
+  - {fileID: 2100000, guid: 69f3569fd1e9a76478af36e95efb408f, type: 2}
+  - {fileID: 2100000, guid: 3f6c728bee6b5b74c91e47fcd73c8c5f, type: 2}
+  - {fileID: 2100000, guid: 99dd855aa9f739c49974c534df9a75dc, type: 2}
 --- !u!4 &279628329
 Transform:
   m_ObjectHideFlags: 0

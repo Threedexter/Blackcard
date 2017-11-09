@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     int physicalMight;
     int life;
     int food;
+    public Deck deck;
+    public Hand hand;
 
     // Use this for initialization
     void Start()
