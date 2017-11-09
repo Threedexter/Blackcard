@@ -75,4 +75,21 @@ public class Feel
     {
         blocked_sides = Random.Range(min_blocked, max_blocked + 1);
     }
+
+    public static Feel RandomFeel()
+    {
+        int rand = Random.Range(0, 4);
+        switch (rand)
+        {
+            case 0:
+                return Feel.Grassland;
+            case 1:
+                return Feel.Marsh;
+            case 2:
+                return Feel.Mountain;
+            case 3:
+                return Feel.Ruins;
+        }
+        return Grassland;
+    }
 }

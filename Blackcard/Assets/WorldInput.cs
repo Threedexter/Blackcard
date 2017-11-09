@@ -15,7 +15,7 @@ public class WorldInput : MonoBehaviour {
         {
             Vector3 mouseLoc = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 planePosition = new Vector2(Mathf.Round(mouseLoc.x), Mathf.Round(mouseLoc.y));
-            if(Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.Grassland);
+            if(Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
         }
 	}
 }
