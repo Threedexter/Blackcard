@@ -11,55 +11,100 @@ public class Land : Target
     protected Walls walls;
     protected Effect effect;
 
-    // debug
-    public bool hasEnemy;
-    public bool hasLoot;
+    private bool spawnedEnemy;
+    private bool spawnedLoot;
 
+    /// <summary>
+    /// Spawns a land
+    /// </summary>
+    /// <param name="location"></param>
+    /// <param name="feel"></param>
     public void Spawn(Vector2 location, Feel feel)
     {
         this.walls = new Walls();
         this.feel = feel;
-        //todo: adjust land to feel
+        // Decide to spawn loot
+        SpawnLootIfShould();
 
-        //todo: decide to spawn loot
+        // Decide to spawn enemy
+        SpawnEnemyIfShould();
 
+        foreach (Material m in Fieldmanager.instance.planes)
+        {
+            if (m.name == feel.name)
+            {
+                this.GetComponent<Renderer>().material = m;
+                break;
+            }
+        }
 
-        //todo: decide to spawn enemy
-
-
-        //todo: set walls based on feel
+        // Set walls based on feel
         feel.GenerateWalls();
         int walls = feel.blocked_sides;
-        Debug.Log("Generating Walls: " + walls);
         List<string> positions = new List<string>() { "top", "bottom", "left", "right" };
         positions = positions.PickRandom(walls).ToList();
 
         if (positions.Contains("top"))
         {
             PlaceWall(new Vector3(0, .45f, 0), true);
-            Debug.Log("Generating Top Wall");
             this.walls.topBlocked = true;
         }
         if (positions.Contains("bottom"))
         {
             PlaceWall(new Vector3(0, -.45f, 0), true);
-            Debug.Log("Generating Bottom Wall");
             this.walls.bottomBlocked = true;
         }
         if (positions.Contains("left"))
         {
             PlaceWall(new Vector3(-.45f, 0, 0));
-            Debug.Log("Generating Left Wall");
             this.walls.leftBlocked = true;
         }
         if (positions.Contains("right"))
         {
             PlaceWall(new Vector3(.45f, 0, 0));
-            Debug.Log("Generating Right Wall");
             this.walls.rightBlocked = true;
         }
     }
 
+    /// <summary>
+    /// Spawns an enemy on this tile if it should / was spawned before but was re-triggered
+    /// </summary>
+    public void SpawnEnemyIfShould()
+    {
+        bool shouldspawn = !spawnedEnemy && (Random.Range(0, 101) < feel.spawn_enemy_chance);
+        if (shouldspawn)
+        {
+            GameObject spawn = Instantiate(Fieldmanager.instance.enemy, this.transform, true);
+            spawn.transform.position = transform.position;
+        }
+    }
+
+    /// <summary>
+    /// Spawns loot on this tile if it should / was spawned before but was re-triggered
+    /// </summary>
+    public void SpawnLootIfShould()
+    {
+        bool shouldspawn = !spawnedLoot && (Random.Range(0, 101) < feel.spawn_loot_chance);
+        if (shouldspawn)
+        {
+            GameObject spawn = Instantiate(Fieldmanager.instance.loot, this.transform, true);
+            spawn.transform.position = transform.position;
+        }
+    }
+
+    /// <summary>
+    /// Destroys this land
+    /// </summary>
+    public void Decay()
+    {
+        Destroy(this);
+    }
+
+    /// <summary>
+    /// Places a wall on a certain spot
+    /// </summary>
+    /// <param name="location"></param>
+    /// <param name="rotate"></param>
     private void PlaceWall(Vector3 location, bool rotate = false)
     {
         GameObject spawnedWall = Instantiate(Fieldmanager.instance.wall, this.transform, true);
@@ -69,6 +114,10 @@ public class Land : Target
         spawnedWall.transform.position = transform.position + location;
     }
 
+    /// <summary>
+    /// Turns the land to the left or right
+    /// </summary>
+    /// <param name="left"></param>
     public void Turn(bool left)
     {
         walls.Turn(left);
@@ -76,6 +125,10 @@ public class Land : Target
         this.transform.Rotate(new Vector3(0, -1, 0), turnage);
     }
 
+    /// <summary>
+    /// Adds a status effect to a land
+    /// </summary>
+    /// <param name="effect"></param>
     public void AddEffect(Effect effect)
     {
         this.effect = effect;
