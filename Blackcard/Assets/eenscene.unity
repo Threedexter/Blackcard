@@ -139,7 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ff8813b1b0852418138636e89074b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plane: {fileID: 1162899261308196, guid: ad28e3e400f56e74d8bf48609b47cec2, type: 2}
+  plane: {fileID: 114197177962162546, guid: ad28e3e400f56e74d8bf48609b47cec2, type: 2}
+  wall: {fileID: 1029266723173854, guid: 2ecf71d9afe7bda4da882fa7c0b7859a, type: 2}
 --- !u!4 &279628329
 Transform:
   m_ObjectHideFlags: 0

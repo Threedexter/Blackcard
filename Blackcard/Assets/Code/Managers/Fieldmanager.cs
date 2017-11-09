@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class Fieldmanager : MonoBehaviour
 {
+    public static Fieldmanager instance;
 
-    public GameObject plane;
+    public Land plane;
+    public GameObject wall;
 
-    private List<Land> lands = new List<Land>();
+    private Dictionary<Vector2, Land> lands = new Dictionary<Vector2, Land>();
+
 
 	// Use this for initialization
 	void Awake ()
     {
-        // todo : turn this into plane.Spawn( with parameters about land )
-        SpawnPlane(new Vector2(0, 0));
-        SpawnPlane(new Vector2(1, 0));
-        SpawnPlane(new Vector2(0, 1));
-        SpawnPlane(new Vector2(1, 1));
+        instance = this;
+        SpawnPlane(new Vector2(0, 0), Feel.Start);
+        SpawnPlane(new Vector2(1, 0), Feel.Start);
+        SpawnPlane(new Vector2(0, 1), Feel.Start);
+        SpawnPlane(new Vector2(1, 1), Feel.Start);
     }
 
-    private void SpawnPlane(Vector2 location)
+    public void SpawnPlane(Vector2 location, Feel feel)
     {
-        Instantiate(plane, new Vector3(location.x, location.y, 0), plane.transform.rotation);
-        // todo : add land to list
+        Land x = Instantiate(plane, new Vector3(location.x, location.y, 0), plane.transform.rotation) as Land;
+        x.Spawn(location, feel);
+        lands.Add(location, x);
+    }
+
+    public bool IsFree(Vector2 location)
+    {
+        return lands.ContainsKey(location);
     }
 }
