@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    int magicalMight;
+    int physicalMight;
+    int life;
+    int food;
 
     // Use this for initialization
     void Start()

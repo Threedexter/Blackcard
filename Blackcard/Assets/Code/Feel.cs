@@ -2,6 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Feel : MonoBehaviour
+{
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
+
 public class Feel
 {
     public readonly static Feel Grassland;
@@ -69,4 +85,3 @@ public class Feel
     {
         blocked_sides = Random.Range(min_blocked, max_blocked + 1);
     }
-}
