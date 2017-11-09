@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Feel : MonoBehaviour
+public enum Feel
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    Ruins,
+    Mash,
+    Grassland,
+    Mountains,
 }
