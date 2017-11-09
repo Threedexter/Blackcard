@@ -29,13 +29,20 @@ public class Land : Target
         // Decide to spawn enemy
         SpawnEnemyIfShould();
 
-        foreach (Material m in Fieldmanager.instance.planes)
+        switch (feel.name)
         {
-            if (m.name == feel.name)
-            {
-                this.GetComponent<Renderer>().material = m;
+            case "Grass":
+                this.GetComponent<Renderer>().material.mainTexture = Fieldmanager.instance.grassPlanes.PickRandom();
                 break;
-            }
+            case "Marsh":
+                this.GetComponent<Renderer>().material.mainTexture = Fieldmanager.instance.marshPlanes.PickRandom();
+                break;
+            case "Mountain":
+                this.GetComponent<Renderer>().material.mainTexture = Fieldmanager.instance.mountainPlanes.PickRandom();
+                break;
+            case "Ruins":
+                this.GetComponent<Renderer>().material.mainTexture = Fieldmanager.instance.ruinsPlanes.PickRandom();
+                break;
         }
 
         // Set walls based on feel
