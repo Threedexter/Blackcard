@@ -11,7 +11,6 @@ public class Fieldmanager : MonoBehaviour
 
     private Dictionary<Vector2, Land> lands = new Dictionary<Vector2, Land>();
 
-
 	// Use this for initialization
 	void Awake ()
     {
@@ -31,6 +30,17 @@ public class Fieldmanager : MonoBehaviour
 
     public bool IsFree(Vector2 location)
     {
-        return lands.ContainsKey(location);
+        return !lands.ContainsKey(location);
+    }
+
+
+    public bool HasLandNear(Vector2 position)
+    {
+        if (!IsFree(position)) return false;
+        Vector2 Bottom = new Vector2(position.x, position.y - 1);
+        Vector2 Top = new Vector2(position.x, position.y + 1);
+        Vector2 Left = new Vector2(position.x - 1, position.y);
+        Vector2 Right = new Vector2(position.x + 1, position.y);
+        return (!IsFree(Bottom) || !IsFree(Top) || !IsFree(Left) || !IsFree(Right)) ? true : false;
     }
 }
