@@ -2,20 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldInput : MonoBehaviour {
+public class WorldInput : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    public GameObject HighlightTile;
+    private GameObject currentHighlight;
+
+    // Use this for initialization
+    void Start()
+    {
+        if (HighlightTile != null)
+        {
+            currentHighlight = Instantiate(HighlightTile, Vector3.zero, HighlightTile.transform.rotation) as GameObject;
+            currentHighlight.SetActive(false);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mouseLoc = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 planePosition = new Vector2(Mathf.Round(mouseLoc.x), Mathf.Round(mouseLoc.y));
-            if(Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
+            Vector2 planePosition = GetMouseLocationAsPlanePosition();
+            if (Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
         }
-	}
+
+        if (currentHighlight != null)
+            Highlight();
+    }
+
+    public void Highlight()
+    {
+        Vector2 currentMousePos = GetMouseLocationAsPlanePosition();
+        if (Fieldmanager.instance.HasLandNear(currentMousePos))
+        {
+            currentHighlight.transform.position = new Vector3(currentMousePos.x, currentMousePos.y, 0);
+            currentHighlight.SetActive(true);
+        }
+        else
+        {
+            currentHighlight.SetActive(false);
+        }
+    }
+
+    public Vector2 GetMouseLocationAsPlanePosition()
+    {
+        Vector3 mouseLoc = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return new Vector2(Mathf.Round(mouseLoc.x), Mathf.Round(mouseLoc.y));
+    }
 }
