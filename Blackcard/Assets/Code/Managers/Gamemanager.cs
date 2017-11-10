@@ -20,6 +20,7 @@ public class Gamemanager : MonoBehaviour
     public int moveSteps;
 
     public int landsToPlace = 0;
+    public Feel feel = Feel.Grassland;
 
     // Use this for initialization
     void Start()
@@ -61,7 +62,7 @@ public class Gamemanager : MonoBehaviour
     {
         if (landsToPlace > 0 && Fieldmanager.instance.HasLandNear(planePosition))
         {
-            Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
+            Fieldmanager.instance.SpawnPlane(planePosition, feel);
             landsToPlace--;
         }
     }
