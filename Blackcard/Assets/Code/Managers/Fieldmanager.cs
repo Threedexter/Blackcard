@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Code.Base;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,7 +65,11 @@ public class Fieldmanager : MonoBehaviour
         return !lands.ContainsKey(location);
     }
 
-
+    /// <summary>
+    /// Checks if a land is near the current vector. If a land is on the vector, it never counts as near
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
     public bool HasLandNear(Vector2 position)
     {
         if (!IsFree(position)) return false;
@@ -75,3 +80,7 @@ public class Fieldmanager : MonoBehaviour
         return (!IsFree(Bottom) || !IsFree(Top) || !IsFree(Left) || !IsFree(Right)) ? true : false;
     }
 }
+
+    public Enemy enemy;
+    public Loot loot;
+    public GameObject wall;

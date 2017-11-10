@@ -11,15 +11,27 @@ public class Land : Target
     protected Walls walls;
     protected Effect effect;
 
+    public bool HasLoot
+    {
+        get { return loot != null; }
+    }
+    public bool HasEnemy
+    {
+        get { return enemy != null; }
+    }
+
     private bool spawnedEnemy;
+    private Loot loot;
+
     private bool spawnedLoot;
+    private Enemy enemy;
 
     /// <summary>
     /// Spawns a land
     /// </summary>
     /// <param name="location"></param>
     /// <param name="feel"></param>
-    public void Spawn(Vector2 location, Feel feel)
+    public void Spawn(Vector2 location, Feel feel, bool spawnBoss = false)
     {
         this.walls = new Walls();
         this.feel = feel;
@@ -27,7 +39,7 @@ public class Land : Target
         SpawnLootIfShould();
 
         // Decide to spawn enemy
-        SpawnEnemyIfShould();
+        SpawnEnemyIfShould(spawnBoss);
 
         switch (feel.name)
         {
@@ -46,8 +58,7 @@ public class Land : Target
         }
 
         // Set walls based on feel
-        feel.GenerateWalls();
-        int walls = feel.blocked_sides;
+        int walls = feel.blocked_sides.Generated;
         List<string> positions = new List<string>() { "top", "bottom", "left", "right" };
         positions = positions.PickRandom(walls).ToList();
 
@@ -74,15 +85,91 @@ public class Land : Target
     }
 
     /// <summary>
+    /// Reshuffles a land for enemies and loot
+    /// </summary>
+    public void Reshuffle()
+    {
+        SpawnEnemyIfShould(false);
+        SpawnLootIfShould();
+    }
+
+    /// <summary>
+    /// Spawns an enemy
+    /// </summary>
+    /// <returns></returns>
+    public Enemy SpawnEnemy(bool isBoss)
+    {
+        Enemy spawn = Instantiate(Fieldmanager.instance.enemy, this.transform, true) as Enemy;
+        spawn.transform.position = transform.position;
+        double multiplier = 1;
+        if (isBoss)
+        {
+            multiplier = 2.5;
+        }
+
+        //todo: get player for relative
+        int magical = (int)(feel.magicalMightEnemy.Generated * multiplier);
+        int physical = (int)(feel.physicalMightEnemy.Generated * multiplier);
+        spawn.Spawn(magical, physical, new Loot()
+        {
+            Food = 1,
+            PhysicalMight = (int)(physical * 0.05),
+            MagicalMight = (int)(magical * 0.05)
+        });
+
+        return spawn;
+    }
+
+    /// <summary>
+    /// Spawns loot
+    /// </summary>
+    /// <returns></returns>
+    public Loot SpawnLoot()
+    {
+        Loot spawn = Instantiate(Fieldmanager.instance.loot, this.transform, true) as Loot;
+        spawn.transform.position = transform.position;
+
+        spawn.Spawn(feel.physicalMightLoot.Generated, feel.magicalMightLoot.Generated, feel.turnLoot.Generated);
+
+        return spawn;
+    }
+
+    /// <summary>
+    /// Removes the loot from this land
+    /// </summary>
+    public void CleanLoot()
+    {
+        spawnedLoot = false;
+        if (HasLoot)
+        {
+            Destroy(loot);
+        }
+        loot = null;
+    }
+
+    /// <summary>
+    /// Removes the enemy from this land
+    /// </summary>
+    public void CleanEnemy()
+    {
+        spawnedEnemy = false;
+        if (HasEnemy)
+        {
+            Destroy(enemy);
+        }
+        enemy = null;
+    }
+
+    /// <summary>
     /// Spawns an enemy on this tile if it should / was spawned before but was re-triggered
     /// </summary>
-    public void SpawnEnemyIfShould()
+    public void SpawnEnemyIfShould(bool isboss)
     {
         bool shouldspawn = !spawnedEnemy && (Random.Range(0, 101) < feel.spawn_enemy_chance);
-        if (shouldspawn)
+        if (shouldspawn || isboss)
         {
-            GameObject spawn = Instantiate(Fieldmanager.instance.enemy, this.transform, true);
-            spawn.transform.position = transform.position;
+            this.enemy = SpawnEnemy(isboss);
+            spawnedEnemy = true;
         }
     }
 
@@ -94,16 +181,18 @@ public class Land : Target
         bool shouldspawn = !spawnedLoot && (Random.Range(0, 101) < feel.spawn_loot_chance);
         if (shouldspawn)
         {
-            GameObject spawn = Instantiate(Fieldmanager.instance.loot, this.transform, true);
-            spawn.transform.position = transform.position;
+            this.loot = SpawnLoot();
+            spawnedLoot = true;
         }
     }
 
     /// <summary>
-    /// Destroys this land
+    /// Destroys this land and the loot and the enemy on it
     /// </summary>
     public void Decay()
     {
+        CleanEnemy();
+        CleanLoot();
         Destroy(this);
     }
 
