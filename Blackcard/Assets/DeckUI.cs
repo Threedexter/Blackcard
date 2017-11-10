@@ -14,22 +14,6 @@ public class DeckUI : MonoBehaviour {
             return Gamemanager.instance.player;
         }
     }
-
-    // Use this for initialization
-    void Start () {
-        newPlayer.hand = new Hand();
-        List<Card> testCards = new List<Card>();
-        testCards.Add(new Card("Test1", 2, new Effect(), true));
-        testCards.Add(new Card("Test2", 2, new Effect(), true));
-        testCards.Add(new Card("Test3", 2, new Effect(), true));
-        testCards.Add(new Card("Test4", 2, new Effect(), true));
-        testCards.Add(new Card("Test5", 2, new Effect(), true));
-        testCards.Add(new Card("Test6", 2, new Effect(), true));
-        testCards.Add(new Card("Test7", 2, new Effect(), true));
-        testCards.Add(new Card("Test8", 2, new Effect(), true));
-        newPlayer.hand.cards = testCards;
-        
-	}
 	
 	// Update is called once per frame
 	void Update () {

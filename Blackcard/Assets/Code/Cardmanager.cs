@@ -11,19 +11,7 @@ public class Cardmanager : MonoBehaviour
     void Awake()
     {
         instance = this;
-    }   
-
-	// Use this for initialization
-	void Start () 
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-		
-	}
+    }
 
     public void DrawCards(Player player, int drawcount)
     {

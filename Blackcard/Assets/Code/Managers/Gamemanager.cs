@@ -15,12 +15,12 @@ public class Gamemanager : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        player = new Player();
         Vector2 startPos = Fieldmanager.instance.lands.PickRandom().Key;
         StartPosition = new Vector3(startPos.x, startPos.y);
         instance = this;
         PlayerInstance = Instantiate(PlayerPrefab,StartPosition,Quaternion.identity);
-	}
+        player = new Player(PlayerInstance);
+    }
 	
 	// Update is called once per frame
 	void Update () {
