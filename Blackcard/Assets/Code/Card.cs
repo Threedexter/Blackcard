@@ -9,13 +9,21 @@ public class Card
     Effect effect;
     bool mustForcePlay;
 
-    public void ForcePlay()
+    public Card(string name, int lands, Effect effect, bool mustForcePlay)
     {
-
+        this.name = name;
+        this.lands = lands;
+        this.effect = effect;
+        this.mustForcePlay = mustForcePlay;
     }
 
-    public void ActivateEffect()
+    public bool ForcePlay()
     {
+        return ActivateEffect();
+    }
 
+    public bool ActivateEffect()
+    {
+        return effect.Activate();
     }
 }

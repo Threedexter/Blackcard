@@ -14,9 +14,15 @@ public class DeckUI : MonoBehaviour {
     public Text Card7;
     public Text Card8;
 
+    private Player newPlayer;
+
     // Use this for initialization
     void Start () {
-		
+        List<Card> testCards = new List<Card>();
+        testCards.Add()
+
+        newPlayer.hand.cards = testCards;
+        
 	}
 	
 	// Update is called once per frame

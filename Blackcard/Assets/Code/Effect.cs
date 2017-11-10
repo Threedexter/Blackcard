@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Effect : MonoBehaviour
+public class Effect
 {
     int duration;
 
-    // Use this for initialization
-    void Start()
+    public bool Activate()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        return false;
     }
 }
