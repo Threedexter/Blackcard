@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Code.Base;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class Player
     public int magicalMight = 10;
     public int physicalMight = 10;
     public int life = 5;
-    public int food;
+    public int food = 15;
     public Deck deck;
     public Hand hand;
     private GameObject player;
@@ -23,8 +24,32 @@ public class Player
     {
         if (CheckMove(planetomoveto))
         {
-            player.transform.position = new Vector3(planetomoveto.transform.position.x, planetomoveto.transform.position.y, -1);
             Gamemanager.instance.PlayerMoved(planetomoveto);
+            if (planetomoveto.HasEnemy)
+            {
+                if (!planetomoveto.enemy.Fight(this.physicalMight, this.magicalMight))
+                {
+                    life--;
+                    return;
+                }
+                else
+                {
+                    Loot l = planetomoveto.enemy.Loot();
+                    this.food += l.Food;
+                    this.physicalMight += l.PhysicalMight;
+                    this.magicalMight += l.MagicalMight;
+                    planetomoveto.enemy.Kill();
+                    planetomoveto.CleanEnemy();
+                }
+            }
+            if (planetomoveto.HasLoot)
+            {
+                this.food += planetomoveto.loot.Food;
+                this.physicalMight += planetomoveto.loot.PhysicalMight;
+                this.magicalMight += planetomoveto.loot.MagicalMight;
+                planetomoveto.CleanLoot();
+            }
+            player.transform.position = new Vector3(planetomoveto.transform.position.x, planetomoveto.transform.position.y, -1);
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Gamemanager : MonoBehaviour
         PlayerInstance = Instantiate(PlayerPrefab, StartPosition, PlayerPrefab.transform.rotation);
         player = new Player(PlayerInstance);
         Cardmanager.Instance.DrawCards(player, 5);
+        DeckUI.instance.DisplayCards(player);
     }
 
     public void ActivateCard(Card card)
@@ -43,8 +45,14 @@ public class Gamemanager : MonoBehaviour
     {
         playedCards = 0;
         moveSteps = maxMoveSteps;
+        if(player.food <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+        player.food--;
         Cardmanager.Instance.DrawCards(player);
         Cardmanager.Instance.CheckEndTurnCards(player);
+        DeckUI.instance.DisplayCards(player);
     }
 
     public void PlayerMoved(Land land)

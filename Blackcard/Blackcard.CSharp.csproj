@@ -234,6 +234,7 @@
     <Compile Include="Assets\Code\Managers\Effectmanager.cs" />
     <Compile Include="Assets\Code\Managers\Fieldmanager.cs" />
     <Compile Include="Assets\Code\Managers\Gamemanager.cs" />
+    <Compile Include="Assets\Code\Managers\UIManager.cs" />
     <Compile Include="Assets\Code\Player.cs" />
     <Compile Include="Assets\DeckUI.cs" />
     <Compile Include="Assets\WorldInput.cs" />

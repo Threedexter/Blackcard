@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class DeckUI : MonoBehaviour
 {
 
-    public Text[] cards;
+    public static DeckUI instance;
+
+    public List<Text> cards;
 
     private Player newPlayer
     {
@@ -16,7 +18,11 @@ public class DeckUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Update()
     {
         DisplayCards(newPlayer);
@@ -24,18 +30,24 @@ public class DeckUI : MonoBehaviour
 
     public void DisplayCards(Player player)
     {
-        if (player.hand == null || player.hand.cards == null) return;
+        if (player.hand == null || player.hand.cards == null || player == null) return;
 
-        for (int i = 0; i < cards.Length; i++)
+        for (int i = 0; i < this.cards.Count; i++)
         {
-            cards[i].text = "";
+            if (this.cards[i] != null)
+            {
+                this.cards[i].text = "";
+            }
         }
 
         for (int i = 0; i < player.hand.cards.Count; i++)
         {
-            if (i < cards.Length)
+            if (i < cards.Count)
             {
-                cards[i].text = player.hand.cards[i].name + System.Environment.NewLine + player.hand.cards[i].description;
+                if (this.cards[i] != null)
+                {
+                    cards[i].text = player.hand.cards[i].name + System.Environment.NewLine + player.hand.cards[i].description;
+                }
             }
         }
     }

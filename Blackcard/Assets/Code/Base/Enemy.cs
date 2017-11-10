@@ -121,7 +121,6 @@ public class Enemy : Target
     public void Kill()
     {
         AllEnemies.Remove(this);
-        Destroy(this);
     }
 
     /// <summary>

@@ -23,10 +23,10 @@ public class Land : Target
     }
 
     public bool spawnedEnemy;
-    private Loot loot;
+    public Loot loot;
 
     private bool spawnedLoot;
-    private Enemy enemy;
+    public Enemy enemy;
 
     /// <summary>
     /// Spawns a land
@@ -159,6 +159,7 @@ public class Land : Target
         if (HasLoot)
         {
             Destroy(loot);
+            Destroy(loot.gameObject);
         }
         loot = null;
     }
@@ -172,6 +173,7 @@ public class Land : Target
         if (HasEnemy)
         {
             Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
         enemy = null;
     }
