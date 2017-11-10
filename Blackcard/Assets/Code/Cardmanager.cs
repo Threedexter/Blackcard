@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Cardmanager : MonoBehaviour 
 {
+    private static Cardmanager instance;
+
+    public static Cardmanager Instance { get { return instance; } }
+
+    void Awake()
+    {
+        instance = this;
+    }   
 
 	// Use this for initialization
 	void Start () 
