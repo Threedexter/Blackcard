@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Card
 {
-    string name;
-    int lands;
-    Effect effect;
-    bool mustForcePlay;
+    public string name;
+    public int lands;
+    public Effect effect;
+    public bool mustForcePlay;
 
     public Card(string name, int lands, Effect effect, bool mustForcePlay)
     {
