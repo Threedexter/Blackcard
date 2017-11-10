@@ -32,6 +32,16 @@ public class Enemy : Target
         this.loot = x;
     }
 
+    private void OnMouseExit()
+    {
+        UIManager.instance.HideEnemyRisks();
+    }
+
+    private void OnMouseOver()
+    {
+        UIManager.instance.SetEnemyRisks(MatchPhysical(Gamemanager.instance.player.physicalMight), MatchMagical(Gamemanager.instance.player.magicalMight));
+    }
+
     /// <summary>
     /// Weakens with a specific percentage
     /// </summary>
@@ -100,7 +110,8 @@ public class Enemy : Target
         {
             // win
             return true;
-        } else
+        }
+        else
         {
             // lose
             return false;
