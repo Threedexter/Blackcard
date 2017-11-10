@@ -43,17 +43,6 @@ public class DeckUI : MonoBehaviour
     public void SelectCard(int cardIndex)
     {
         if (newPlayer.hand.cards.Count <= cardIndex) return;
-
-        Card card = newPlayer.hand.cards[cardIndex];
-        if (card.ActivateEffect())
-        {
-            newPlayer.hand.cards.RemoveAt(cardIndex);
-        }
-        else if (card.feel != null && Gamemanager.instance.landsToPlace <= 0)
-        {
-            Gamemanager.instance.landsToPlace = card.lands;
-            Gamemanager.instance.feel = card.feel;
-            newPlayer.hand.cards.RemoveAt(cardIndex);
-        }
+        Gamemanager.instance.ActivateCard(newPlayer.hand.cards[cardIndex]);
     }
 }
