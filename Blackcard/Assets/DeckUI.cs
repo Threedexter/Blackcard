@@ -7,7 +7,7 @@ public class DeckUI : MonoBehaviour {
 
     public Text[] cards;
 
-    private Player newPlayer;
+    //private Player newPlayer;
 
     // Use this for initialization
     void Start () {
