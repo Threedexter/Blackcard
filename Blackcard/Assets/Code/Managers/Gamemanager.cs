@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Gamemanager : MonoBehaviour
 {
-
     public static Gamemanager instance;
 
     public static GameObject PlayerInstance;
     public Player player;
     public GameObject PlayerPrefab;
+    public Button endTurnButton;
     Vector3 StartPosition;
 
     private const int maxPlayedCards = 2;
@@ -34,30 +35,49 @@ public class Gamemanager : MonoBehaviour
         player = new Player(PlayerInstance);
         Cardmanager.Instance.DrawCards(player, 5);
         DeckUI.instance.DisplayCards(player);
+        endTurnButton.GetComponent<Image>().color = Color.yellow;
     }
 
     public void ActivateCard(Card card)
     {
+        if (playedCards >= maxPlayedCards) return;
+        if (card.ActivateEffect())
+        {
+            player.hand.cards.Remove(card);
+        }
+        else if (card.feel != null && Gamemanager.instance.landsToPlace <= 0)
+        {
+            Gamemanager.instance.landsToPlace = card.lands;
+            Gamemanager.instance.feel = card.feel;
+            Gamemanager.instance.CheckEndTurn();
+            player.hand.cards.Remove(card);
+        }
+
         playedCards++;
+        CheckEndTurn();
     }
 
     public void EndTurn()
     {
-        playedCards = 0;
-        moveSteps = maxMoveSteps;
+        if (landsToPlace <= 0)
+        {
+            playedCards = 0;
         if(player.food <= 0)
         {
             SceneManager.LoadScene(0);
         }
         player.food--;
+            moveSteps = maxMoveSteps;
         Cardmanager.Instance.DrawCards(player);
         Cardmanager.Instance.CheckEndTurnCards(player);
         DeckUI.instance.DisplayCards(player);
+        }
     }
 
     public void PlayerMoved(Land land)
     {
         moveSteps -= land.feel.movement_cost;
+        CheckEndTurn();
     }
 
     public void PlaceLand(Vector2 planePosition)
@@ -66,6 +86,7 @@ public class Gamemanager : MonoBehaviour
         {
             Fieldmanager.instance.SpawnPlane(planePosition, feel);
             landsToPlace--;
+            CheckEndTurn();
         }
     }
 
@@ -73,4 +94,12 @@ public class Gamemanager : MonoBehaviour
     {
         landsToPlace += amount;
     }
+
+    public void CheckEndTurn()
+    {
+        if (landsToPlace <= 0) endTurnButton.GetComponent<Image>().color = Color.yellow;
+        if (landsToPlace > 0) endTurnButton.GetComponent<Image>().color = Color.red;
+        if (playedCards >= maxPlayedCards && landsToPlace <= 0 && !player.CanMove(moveSteps)) endTurnButton.GetComponent<Image>().color = Color.green;
+    }
 }
+

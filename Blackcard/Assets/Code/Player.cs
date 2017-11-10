@@ -53,6 +53,27 @@ public class Player
         }
     }
 
+    public bool CanMove(int moves)
+    {
+        Vector2 currentplayerlocation = new Vector2(Mathf.Round(player.transform.position.x), Mathf.Round(player.transform.position.y));
+
+        Land up;
+        Land down;
+        Land left;
+        Land right;
+        Fieldmanager.instance.lands.TryGetValue(new Vector2(currentplayerlocation.x, currentplayerlocation.y + 1), out up);
+        Fieldmanager.instance.lands.TryGetValue(new Vector2(currentplayerlocation.x, currentplayerlocation.y - 1), out down);
+        Fieldmanager.instance.lands.TryGetValue(new Vector2(currentplayerlocation.x - 1, currentplayerlocation.y), out left);
+        Fieldmanager.instance.lands.TryGetValue(new Vector2(currentplayerlocation.x + 1, currentplayerlocation.y), out right);
+
+        if (up != null && up.feel.movement_cost <= moves) return true;
+        if (down != null && down.feel.movement_cost <= moves) return true;
+        if (left != null && left.feel.movement_cost <= moves) return true;
+        if (right != null && right.feel.movement_cost <= moves) return true;
+        return false;
+
+    }
+
     public bool CheckMove(Land moveto)
     {
         if (Gamemanager.instance.moveSteps - moveto.feel.movement_cost < 0) return false;
