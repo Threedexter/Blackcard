@@ -34,7 +34,7 @@ public class WorldInput : MonoBehaviour
 
                 if (tomoveto != null)
                 {
-                    Player.GetComponent<Player>().MovePlayer(tomoveto);
+                    Gamemanager.instance.player.MovePlayer(tomoveto);
                 }
             }
             else

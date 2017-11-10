@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Land : Target
 {
-    protected Feel feel;
+    public Feel feel;
 
     [SerializeField]
     public Walls walls;

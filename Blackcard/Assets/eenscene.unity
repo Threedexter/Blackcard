@@ -270,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HighlightTile: {fileID: 1913366633627222, guid: 13c07ab3a8c4f834a82cc878c05f2815,
     type: 2}
+  Player: {fileID: 1764055073631432, guid: 9a202964f8123f84481787aa926f4886, type: 2}
 --- !u!1 &484420096
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 1764055073631432, guid: 9a202964f8123f84481787aa926f4886,
     type: 2}
-  StartPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &484420098
 Transform:
   m_ObjectHideFlags: 0
