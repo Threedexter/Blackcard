@@ -225,12 +225,17 @@
     <Compile Include="Assets\Code\Base\Walls.cs" />
     <Compile Include="Assets\Code\Card.cs" />
     <Compile Include="Assets\Code\Cardmanager.cs" />
+    <Compile Include="Assets\Code\Deck.cs" />
     <Compile Include="Assets\Code\Effect.cs" />
     <Compile Include="Assets\Code\Enemy.cs" />
     <Compile Include="Assets\Code\Feel.cs" />
+    <Compile Include="Assets\Code\Hand.cs" />
     <Compile Include="Assets\Code\Managers\Effectmanager.cs" />
     <Compile Include="Assets\Code\Managers\Fieldmanager.cs" />
+    <Compile Include="Assets\Code\Managers\Gamemanager.cs" />
     <Compile Include="Assets\Code\Player.cs" />
+    <Compile Include="Assets\DeckUI.cs" />
+    <Compile Include="Assets\WorldInput.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

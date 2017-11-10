@@ -16,7 +16,7 @@ public class Fieldmanager : MonoBehaviour
     public List<Texture> mountainPlanes = new List<Texture>();
     public List<Texture> ruinsPlanes = new List<Texture>();
 
-    private Dictionary<Vector2, Land> lands = new Dictionary<Vector2, Land>();
+    public Dictionary<Vector2, Land> lands = new Dictionary<Vector2, Land>();
 
 	// Use this for initialization
 	void Awake ()
