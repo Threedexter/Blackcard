@@ -95,6 +95,19 @@ public class Land : Target
         SpawnLootIfShould();
     }
 
+
+    private void OnMouseExit()
+    {
+        if (HasEnemy)
+        UIManager.instance.HideEnemyRisks();
+    }
+
+    private void OnMouseOver()
+    {
+        if (HasEnemy)
+        UIManager.instance.SetEnemyRisks(enemy.MatchPhysical(Gamemanager.instance.player.physicalMight), enemy.MatchMagical(Gamemanager.instance.player.magicalMight));
+    }
+
     /// <summary>
     /// Spawns an enemy
     /// </summary>
@@ -103,10 +116,10 @@ public class Land : Target
     {
         Enemy spawn = Instantiate(Fieldmanager.instance.enemy, this.transform, true) as Enemy;
         spawn.transform.position = transform.position;
-        double multiplier = 1;
+        float multiplier = 1;
         if (isBoss)
         {
-            multiplier = 2.5;
+            multiplier = 2.5f;
         }
 
         Player x = Gamemanager.instance.player;
@@ -119,7 +132,7 @@ public class Land : Target
             PhysicalMight = (int)(physical * 0.05f),
             MagicalMight = (int)(magical * 0.05f)
         });
-
+        this.enemy = spawn;
         return spawn;
     }
 
@@ -133,7 +146,7 @@ public class Land : Target
         spawn.transform.position = transform.position;
 
         spawn.Spawn(feel.physicalMightLoot.Generated, feel.magicalMightLoot.Generated, feel.turnLoot.Generated);
-
+        this.loot = spawn;
         return spawn;
     }
 

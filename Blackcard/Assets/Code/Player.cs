@@ -6,7 +6,7 @@ public class Player
 {
     public int magicalMight = 10;
     public int physicalMight = 10;
-    public int life;
+    public int life = 5;
     public int food;
     public Deck deck;
     public Hand hand;
@@ -23,7 +23,7 @@ public class Player
     {
         if (CheckMove(planetomoveto))
         {
-            player.transform.position = planetomoveto.transform.position;
+            player.transform.position = new Vector3(planetomoveto.transform.position.x, planetomoveto.transform.position.y, -1);
             Gamemanager.instance.PlayerMoved(planetomoveto);
         }
     }
