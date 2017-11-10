@@ -8,7 +8,7 @@ public class Land : Target
     protected Feel feel;
 
     [SerializeField]
-    protected Walls walls;
+    public Walls walls;
     protected Effect effect;
 
     public bool HasLoot
