@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Base;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,16 @@ public class Fieldmanager : MonoBehaviour
             l.Decay();
             lands.Remove(location);
         }
+    }
+
+    public List<Land> GetRandomUnprotectedLands(int amount)
+    {
+        return lands.Where(x => x.Value.isProtected == false).PickRandom(amount).Select(x => x.Value).ToList();
+    }
+
+    public List<Land> GetRandomLands(int amount)
+    {
+        return lands.PickRandom(amount).Select(x => x.Value).ToList();
     }
 
     /// <summary>

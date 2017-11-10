@@ -11,6 +11,8 @@ public class Land : Target
     public Walls walls;
     protected Effect effect;
 
+    public bool isProtected;
+
     public bool HasLoot
     {
         get { return loot != null; }
@@ -20,7 +22,7 @@ public class Land : Target
         get { return enemy != null; }
     }
 
-    private bool spawnedEnemy;
+    public bool spawnedEnemy;
     private Loot loot;
 
     private bool spawnedLoot;

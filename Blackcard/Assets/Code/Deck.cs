@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using UnityEngine;
 
@@ -90,12 +91,16 @@ public class Deck
     /// 
     private static void Protect()
     {
-
+        var lands = Fieldmanager.instance.GetRandomUnprotectedLands(5);
+        foreach (Land l in lands)
+        {
+            l.isProtected = true; // todo: add effect to unprotect them after 5 turns
+        }
     }
 
     private static void GiveFood()
     {
-
+        Gamemanager.instance.player.food += 5;
     }
 
     private static void NerfEnemies()
@@ -134,32 +139,52 @@ public class Deck
 
     private static void SpawnBoss()
     {
-
+        Land land = Fieldmanager.instance.GetRandomLands(1).Single();
+        land.SpawnEnemy(true);
     }
 
     private static void SetNextLandWithLoot()
     {
+        // todo: set next land.
+        Land land = Fieldmanager.instance.GetRandomLands(1).Single();
+        land.SpawnLoot();
 
     }
 
     private static void Restock9Lands()
     {
-
+        var lands = Fieldmanager.instance.GetRandomLands(9);
+        foreach (Land l in lands)
+        {
+            l.SpawnEnemyIfShould(false);
+            l.SpawnLootIfShould();
+        }
     }
 
     private static void Draw2()
     {
-
+        // todo: draw cards
     }
 
     private static void AddLootAndEnemies()
     {
-
+        // Todo: replace with the next 2 lands
+        var lands = Fieldmanager.instance.GetRandomLands(2);
+        foreach (Land l in lands)
+        {
+            l.SpawnEnemyIfShould(false);
+            l.SpawnLootIfShould();
+        }
     }
 
     private static void AddEnemyProtection()
     {
 
+        var lands = Fieldmanager.instance.GetRandomLands(2);
+        foreach (Land l in lands)
+        {
+            l.spawnedEnemy = true;
+        }
     }
 
 }
