@@ -28,18 +28,12 @@ public class Gamemanager : MonoBehaviour
     {
         moveSteps = maxMoveSteps;
         Vector2 startPos = Fieldmanager.instance.lands.PickRandom().Key;
-        StartPosition = new Vector3(startPos.x, startPos.y);
+        StartPosition = new Vector3(startPos.x, startPos.y, -1);
         instance = this;
-        PlayerInstance = Instantiate(PlayerPrefab, StartPosition, Quaternion.identity);
+        PlayerInstance = Instantiate(PlayerPrefab, StartPosition, PlayerPrefab.transform.rotation);
         player = new Player(PlayerInstance);
         Cardmanager.Instance.DrawCards(player, 5);
         endTurnButton.GetComponent<Image>().color = Color.yellow;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void ActivateCard(Card card)

@@ -46,15 +46,15 @@ public class Deck
         new Card("Dungeons", "Add two lands with loot and enemies", AddLootAndEnemies),
         new Card("City", "Protects a land from enemies", AddEnemyProtection),
 
-        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
-        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
-        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
-        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        //new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        //new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        //new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        //new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
 
-        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
-        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
-        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
-        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        //new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        //new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        //new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        //new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
 
         new Card("Fresh Thoughts", "Draw 2 cards", Draw2), // 4x
         new Card("Fresh Thoughts", "Draw 2 cards", Draw2), // 4x
@@ -66,10 +66,10 @@ public class Deck
         new Card("Rejuvination", "Reshuffle 9 lands", Restock9Lands), // 4x
         new Card("Rejuvination", "Reshuffle 9 lands", Restock9Lands), // 4x
 
-        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
-        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
-        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
-        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        //new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        //new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        //new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        //new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
 
         new Card("Free Dungeon", "Add a land with loot", SetNextLandWithLoot, Feel.Ruins, 1, true), // 4x
         new Card("Bountiful Harvest", "Add a land with loot", SetNextLandWithLoot, Feel.Grassland, 1, true), // 4x
@@ -139,6 +139,11 @@ public class Deck
         // Spawn until 2
 
         // improve 2 random
+        var elist = Enemy.AllEnemies.PickRandom(2);
+        foreach (Enemy e in elist)
+        {
+            e.Weaken(-25);
+        }
     }
 
     private static void SpawnBoss()
@@ -167,7 +172,7 @@ public class Deck
 
     private static void Draw2()
     {
-        // todo: draw cards
+        Cardmanager.Instance.DrawCards(Gamemanager.instance.player, 2);
     }
 
     private static void AddLootAndEnemies()
