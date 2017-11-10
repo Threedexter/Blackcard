@@ -191,4 +191,8 @@ public class Deck
         }
     }
 
+    public override string ToString()
+    {
+        return this.cards.Count.ToString(); 
+    }
 }

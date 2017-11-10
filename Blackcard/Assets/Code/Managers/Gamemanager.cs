@@ -19,6 +19,8 @@ public class Gamemanager : MonoBehaviour
     private int playedCards;
     public int moveSteps;
 
+    public int landsToPlace = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -28,6 +30,7 @@ public class Gamemanager : MonoBehaviour
         instance = this;
         PlayerInstance = Instantiate(PlayerPrefab, StartPosition, Quaternion.identity);
         player = new Player(PlayerInstance);
+        Cardmanager.Instance.DrawCards(player, 5);
     }
 
     // Update is called once per frame
@@ -45,10 +48,26 @@ public class Gamemanager : MonoBehaviour
     {
         playedCards = 0;
         moveSteps = maxMoveSteps;
+        Cardmanager.Instance.DrawCards(player);
+        Cardmanager.Instance.CheckEndTurnCards(player);
     }
 
     public void PlayerMoved(Land land)
     {
         moveSteps -= land.feel.movement_cost;
+    }
+
+    public void PlaceLand(Vector2 planePosition)
+    {
+        if (landsToPlace > 0 && Fieldmanager.instance.HasLandNear(planePosition))
+        {
+            Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
+            landsToPlace--;
+        }
+    }
+
+    public void AddLandsToPlace(int amount)
+    {
+        landsToPlace += amount;
     }
 }

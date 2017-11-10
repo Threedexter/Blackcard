@@ -33,7 +33,7 @@ public class DeckUI : MonoBehaviour {
         {
             if(i < cards.Length)
             {
-                cards[i].text = player.hand.cards[i].name + System.Environment.NewLine + player.hand.cards[i].effect.ToString();
+                cards[i].text = player.hand.cards[i].name + System.Environment.NewLine + player.hand.cards[i].description;
             }
         }
     }

@@ -19,6 +19,7 @@ public class Card
         this.effect = effect;
         this.mustForcePlay = mustForcePlay;
         this.feel = feel;
+        this.description = description;
     }
 
     public Card(string name, string description, Feel feel, int lands = 0, bool mustForcePlay = false)
@@ -27,6 +28,7 @@ public class Card
         this.lands = lands;
         this.mustForcePlay = mustForcePlay;
         this.feel = feel;
+        this.description = description;
     }
 
     public bool ForcePlay()

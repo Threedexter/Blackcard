@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Code.Base;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +16,21 @@ public class Cardmanager : MonoBehaviour
 
     public void DrawCards(Player player, int drawcount)
     {
+        if (Deck.Cards.Count <= 0) return;
         for (int i = 0; i < drawcount; i++)
         {
-            player.hand.cards.Add(player.deck.cards[0]);
-            player.deck.cards.RemoveAt(0);
+            Card card = player.deck.cards.PickRandom();
+            if (card != null)
+            {
+                player.hand.cards.Add(card);
+                player.deck.cards.Remove(card);
+            }
         }
     }
 
     public void DrawCards(Player player)
     {
-        DrawCards(player, 2);
+        DrawCards(player, 1);
     }
 
     public void CheckEndTurnCards(Player player)

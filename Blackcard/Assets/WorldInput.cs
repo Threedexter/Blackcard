@@ -39,7 +39,7 @@ public class WorldInput : MonoBehaviour
             }
             else
             {
-                if (Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
+                Gamemanager.instance.PlaceLand(planePosition);
             }
         }
 
@@ -50,7 +50,7 @@ public class WorldInput : MonoBehaviour
     public void Highlight()
     {
         Vector2 currentMousePos = GetMouseLocationAsPlanePosition();
-        if (Fieldmanager.instance.HasLandNear(currentMousePos))
+        if (Fieldmanager.instance.HasLandNear(currentMousePos) && Gamemanager.instance.landsToPlace > 0)
         {
             currentHighlight.transform.position = new Vector3(currentMousePos.x, currentMousePos.y, 0);
             currentHighlight.SetActive(true);

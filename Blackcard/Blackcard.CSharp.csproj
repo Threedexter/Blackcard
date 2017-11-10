@@ -219,15 +219,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Code\Base\Enemy.cs" />
     <Compile Include="Assets\Code\Base\Interfaces\Target.cs" />
     <Compile Include="Assets\Code\Base\Land.cs" />
     <Compile Include="Assets\Code\Base\ListExtensions.cs" />
+    <Compile Include="Assets\Code\Base\Loot.cs" />
     <Compile Include="Assets\Code\Base\Walls.cs" />
     <Compile Include="Assets\Code\Card.cs" />
     <Compile Include="Assets\Code\Cardmanager.cs" />
     <Compile Include="Assets\Code\Deck.cs" />
     <Compile Include="Assets\Code\Effect.cs" />
-    <Compile Include="Assets\Code\Enemy.cs" />
     <Compile Include="Assets\Code\Feel.cs" />
     <Compile Include="Assets\Code\Hand.cs" />
     <Compile Include="Assets\Code\Managers\Effectmanager.cs" />
