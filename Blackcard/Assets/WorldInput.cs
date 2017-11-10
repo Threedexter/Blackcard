@@ -7,6 +7,7 @@ public class WorldInput : MonoBehaviour
 
     public GameObject HighlightTile;
     private GameObject currentHighlight;
+    public GameObject Player;
 
     // Use this for initialization
     void Start()
@@ -24,7 +25,22 @@ public class WorldInput : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 planePosition = GetMouseLocationAsPlanePosition();
-            if (Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
+
+            if (!Fieldmanager.instance.IsFree(planePosition))
+            {
+                Land tomoveto = null;
+
+                Fieldmanager.instance.lands.TryGetValue(planePosition, out tomoveto);
+
+                if (tomoveto != null)
+                {
+                    Player.GetComponent<Player>().MovePlayer(tomoveto);
+                }
+            }
+            else
+            {
+                if (Fieldmanager.instance.HasLandNear(planePosition)) Fieldmanager.instance.SpawnPlane(planePosition, Feel.RandomFeel());
+            }
         }
 
         if (currentHighlight != null)
