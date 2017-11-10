@@ -8,8 +8,8 @@ public class Fieldmanager : MonoBehaviour
     public static Fieldmanager instance;
 
     public Land plane;
-    public GameObject enemy;
-    public GameObject loot;
+    public Enemy enemy;
+    public Loot loot;
     public GameObject wall;
 
     public List<Texture> grassPlanes = new List<Texture>();
@@ -80,7 +80,3 @@ public class Fieldmanager : MonoBehaviour
         return (!IsFree(Bottom) || !IsFree(Top) || !IsFree(Left) || !IsFree(Right)) ? true : false;
     }
 }
-
-    public Enemy enemy;
-    public Loot loot;
-    public GameObject wall;

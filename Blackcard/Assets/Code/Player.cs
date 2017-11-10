@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player
 {
-    int magicalMight;
-    int physicalMight;
+    public int magicalMight = 10;
+    public int physicalMight = 10;
     int life;
     int food;
     public Deck deck;

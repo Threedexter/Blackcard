@@ -107,14 +107,15 @@ public class Land : Target
             multiplier = 2.5;
         }
 
-        //todo: get player for relative
-        int magical = (int)(feel.magicalMightEnemy.Generated * multiplier);
-        int physical = (int)(feel.physicalMightEnemy.Generated * multiplier);
+        Player x = Gamemanager.instance.player;
+
+        int magical = (int)(feel.magicalMightEnemy.Generated / 100f * multiplier * x.magicalMight);
+        int physical = (int)(feel.physicalMightEnemy.Generated / 100f * multiplier * x.physicalMight);
         spawn.Spawn(magical, physical, new Loot()
         {
             Food = 1,
-            PhysicalMight = (int)(physical * 0.05),
-            MagicalMight = (int)(magical * 0.05)
+            PhysicalMight = (int)(physical * 0.05f),
+            MagicalMight = (int)(magical * 0.05f)
         });
 
         return spawn;
