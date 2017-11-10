@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Code.Base;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,70 +21,70 @@ public class Deck
     static Deck()
     {
         Cards.AddRange(new List<Card>() {
-        new Card("Lucky Charm", Protect),
-        new Card("Good Attitude", GiveFood),
-        new Card("Weak Ground", NerfEnemies),
-        new Card("Lucky Charm", AllowMoveEnemy),
+        new Card("Lucky Charm", "Protect 5 lands", Protect),
+        new Card("Good Attitude", "Give stock for another 5 turns", GiveFood),
+        new Card("Weak Ground","Weaken all enemies", NerfEnemies),
+        new Card("Shinies","Move an enemy", AllowMoveEnemy),
 
-        new Card("Land II", Feel.Grassland, 2),
-        new Card("Land II", Feel.Ruins, 2),
-        new Card("Land II", Feel.Marsh, 2),
-        new Card("Land II", Feel.Mountain, 2),
+        new Card("Land II","Lay 2 grasslands", Feel.Grassland, 2),
+        new Card("Land II","Lay 2 ruins", Feel.Ruins, 2),
+        new Card("Land II","Lay 2 marshes", Feel.Marsh, 2),
+        new Card("Land II","Lay 2 mountains", Feel.Mountain, 2),
 
-        new Card("Land III", Feel.Grassland, 3),
-        new Card("Land III", Feel.Ruins, 3),
-        new Card("Land III", Feel.Marsh, 3),
-        new Card("Land III", Feel.Mountain, 3),
+        new Card("Land III","Lay 3 grasslands", Feel.Grassland, 3),
+        new Card("Land III","Lay 3 ruins", Feel.Ruins, 3),
+        new Card("Land III","Lay 3 marshes", Feel.Marsh, 3),
+        new Card("Land III","Lay 3 mountains", Feel.Mountain, 3),
 
-        new Card("Land IV", Feel.Grassland, 4),
-        new Card("Land IV", Feel.Ruins, 4),
-        new Card("Land IV", Feel.Marsh, 4),
-        new Card("Land IV", Feel.Mountain, 4),
+        new Card("Land IV","Lay 4 grasslands", Feel.Grassland, 4),
+        new Card("Land IV","Lay 4 ruins", Feel.Ruins, 4),
+        new Card("Land IV","Lay 4 marshes", Feel.Marsh, 4),
+        new Card("Land IV","Lay 4 mountains", Feel.Mountain, 4),
 
-        new Card("Land V", Feel.Mountain, 5), // 2x
-        new Card("Land V", Feel.Mountain, 5), // 2x
-        new Card("Dungeons", AddLootAndEnemies),
-        new Card("City", AddEnemyProtection),
+        new Card("Mountain Range","Lay 5 mountains", Feel.Mountain, 5), // 2x
+        new Card("Mountain Range","Lay 5 mountains", Feel.Mountain, 5), // 2x
+        new Card("Dungeons", "Add two lands with loot and enemies", AddLootAndEnemies),
+        new Card("City", "Protects a land from enemies", AddEnemyProtection),
 
-        new Card("Smoothen Terrain", AllowClearWalls), // 4x
-        new Card("Smoothen Terrain", AllowClearWalls), // 4x
-        new Card("Smoothen Terrain", AllowClearWalls), // 4x
-        new Card("Smoothen Terrain", AllowClearWalls), // 4x
+        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
+        new Card("Smoothen Terrain", "Removes all walls from a land", AllowClearWalls), // 4x
 
-        new Card("Minor Earthquake", AllowTwist), // 4x
-        new Card("Minor Earthquake", AllowTwist), // 4x
-        new Card("Minor Earthquake", AllowTwist), // 4x
-        new Card("Minor Earthquake", AllowTwist), // 4x
+        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
+        new Card("Minor Earthquake", "Twist a land", AllowTwist), // 4x
 
-        new Card("Fresh Thoughts", Draw2), // 4x
-        new Card("Fresh Thoughts", Draw2), // 4x
-        new Card("Fresh Thoughts", Draw2), // 4x
-        new Card("Fresh Thoughts", Draw2), // 4x
+        new Card("Fresh Thoughts", "Draw 2 cards", Draw2), // 4x
+        new Card("Fresh Thoughts", "Draw 2 cards", Draw2), // 4x
+        new Card("Fresh Thoughts", "Draw 2 cards", Draw2), // 4x
+        new Card("Fresh Thoughts", "Draw 2 cards", Draw2), // 4x
 
-        new Card("Rejuvination", Restock9Lands), // 4x
-        new Card("Rejuvination", Restock9Lands), // 4x
-        new Card("Rejuvination", Restock9Lands), // 4x
-        new Card("Rejuvination", Restock9Lands), // 4x
+        new Card("Rejuvination", "Reshuffle 9 lands", Restock9Lands), // 4x
+        new Card("Rejuvination", "Reshuffle 9 lands", Restock9Lands), // 4x
+        new Card("Rejuvination", "Reshuffle 9 lands", Restock9Lands), // 4x
+        new Card("Rejuvination", "Reshuffle 9 lands", Restock9Lands), // 4x
 
-        new Card("Major Earthquake", Allow3Twist), // 4x
-        new Card("Major Earthquake", Allow3Twist), // 4x
-        new Card("Major Earthquake", Allow3Twist), // 4x
-        new Card("Major Earthquake", Allow3Twist), // 4x
+        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
+        new Card("Major Earthquake", "Twist 3 lands", Allow3Twist), // 4x
 
-        new Card("Free Dungeon", SetNextLandWithLoot, Feel.Ruins, 1, true), // 4x
-        new Card("Bountiful Harvest", SetNextLandWithLoot, Feel.Grassland, 1, true), // 4x
-        new Card("Special Marsh", SetNextLandWithLoot, Feel.Marsh, 1, true), // 4x
-        new Card("Gold Mine", SetNextLandWithLoot, Feel.Mountain, 1, true), // 4x
+        new Card("Free Dungeon", "Add a land with loot", SetNextLandWithLoot, Feel.Ruins, 1, true), // 4x
+        new Card("Bountiful Harvest", "Add a land with loot", SetNextLandWithLoot, Feel.Grassland, 1, true), // 4x
+        new Card("Special Marsh", "Add a land with loot", SetNextLandWithLoot, Feel.Marsh, 1, true), // 4x
+        new Card("Gold Mine", "Add a land with loot", SetNextLandWithLoot, Feel.Mountain, 1, true), // 4x
 
-        new Card("Angry Gods", Improve2Enemies), // 4x
-        new Card("Angry Gods", Improve2Enemies), // 4x
-        new Card("Angry Gods", Improve2Enemies), // 4x
-        new Card("Angry Gods", Improve2Enemies), // 4x
+        new Card("Angry Gods", "Empower 2 enemies", Improve2Enemies), // 4x
+        new Card("Angry Gods", "Empower 2 enemies", Improve2Enemies), // 4x
+        new Card("Angry Gods", "Empower 2 enemies", Improve2Enemies), // 4x
+        new Card("Angry Gods", "Empower 2 enemies", Improve2Enemies), // 4x
 
-        new Card("Nemesis", SpawnBoss), // 4x
-        new Card("Nemesis", SpawnBoss), // 4x
-        new Card("Nemesis", SpawnBoss), // 4x
-        new Card("Nemesis", SpawnBoss) // 4x
+        new Card("Nemesis", "Spawn a boss", SpawnBoss), // 4x
+        new Card("Nemesis", "Spawn a boss", SpawnBoss), // 4x
+        new Card("Nemesis", "Spawn a boss", SpawnBoss), // 4x
+        new Card("Nemesis", "Spawn a boss", SpawnBoss) // 4x
     });
     }
 
@@ -105,7 +106,10 @@ public class Deck
 
     private static void NerfEnemies()
     {
-
+        foreach(Enemy e in Enemy.AllEnemies)
+        {
+            e.Weaken(25);
+        }
     }
 
     private static void AllowMoveEnemy()

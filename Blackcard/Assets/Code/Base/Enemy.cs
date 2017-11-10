@@ -1,8 +1,11 @@
 ﻿using Assets.Code.Base;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Target
 {
+    public static List<Enemy> AllEnemies = new List<Enemy>();
+
     [SerializeField]
     private int magicalMight;
     [SerializeField]
@@ -18,6 +21,8 @@ public class Enemy : Target
     /// <param name="loot">Loot</param>
     public void Spawn(int mm, int pm, Loot loot)
     {
+        AllEnemies.Add(this);
+
         this.magicalMight = mm;
         this.physicalMight = pm;
         Loot x = this.gameObject.AddComponent<Loot>();
@@ -25,6 +30,16 @@ public class Enemy : Target
         x.MagicalMight = loot.MagicalMight;
         x.PhysicalMight = loot.PhysicalMight;
         this.loot = x;
+    }
+
+    /// <summary>
+    /// Weakens with a specific percentage
+    /// </summary>
+    /// <param name="percentage"></param>
+    public void Weaken(int percentage)
+    {
+        this.magicalMight = (int)((100f - percentage) / 100f * this.magicalMight);
+        this.physicalMight = (int)((100f - percentage) / 100f * this.physicalMight);
     }
 
     /// <summary>
@@ -90,6 +105,12 @@ public class Enemy : Target
             // lose
             return false;
         }
+    }
+
+    public void Kill()
+    {
+        AllEnemies.Remove(this);
+        Destroy(this);
     }
 
     /// <summary>
