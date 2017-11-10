@@ -38,6 +38,8 @@ public class DeckUI : MonoBehaviour {
 
     public void DisplayCards(Player player)
     {
+        if (player.hand == null || player.hand.cards == null) return;
+
         for(int i = 0; i < cards.Length; i++)
         {
             cards[i].text = "";

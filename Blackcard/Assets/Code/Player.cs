@@ -14,6 +14,8 @@ public class Player
 
     public Player(GameObject playerinstance)
     {
+        deck = new Deck();
+        hand = new Hand();
         player = playerinstance;
     }
 
