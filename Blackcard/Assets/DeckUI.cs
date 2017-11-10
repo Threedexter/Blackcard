@@ -7,11 +7,16 @@ public class DeckUI : MonoBehaviour {
 
     public Text[] cards;
 
-    //private Player newPlayer;
+    private Player newPlayer
+    {
+        get
+        {
+            return Gamemanager.instance.player;
+        }
+    }
 
     // Use this for initialization
     void Start () {
-        newPlayer = new Player();
         newPlayer.hand = new Hand();
         List<Card> testCards = new List<Card>();
         testCards.Add(new Card("Test1", 2, new Effect(), true));

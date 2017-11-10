@@ -10,16 +10,22 @@ public class Feel
     public readonly static Feel Ruins;
     public readonly static Feel Start;
 
-    static Feel ()
+    static Feel()
     {
         Start = new Feel()
         {
-            name = "Grass", 
+            name = "Grass",
             spawn_enemy_chance = 0,
             movement_cost = 1,
             spawn_loot_chance = 0,
-            min_blocked = 0,
-            max_blocked = 0
+            blocked_sides = new MinMax(0,0),
+
+            magicalMightEnemy = new MinMax(0, 0),
+            physicalMightEnemy = new MinMax(0, 0),
+
+            magicalMightLoot = new MinMax(0, 0),
+            physicalMightLoot = new MinMax(0, 0),
+            turnLoot = new MinMax(0, 0)
         };
         Grassland = new Feel()
         {
@@ -27,8 +33,14 @@ public class Feel
             spawn_enemy_chance = 60,
             movement_cost = 1,
             spawn_loot_chance = 10,
-            min_blocked = 0,
-            max_blocked = 2
+            blocked_sides = new MinMax(0, 2),
+
+            magicalMightEnemy = new MinMax(60, 120),
+            physicalMightEnemy = new MinMax(90, 120),
+
+            magicalMightLoot = new MinMax(10, 20),
+            physicalMightLoot = new MinMax(5, 10),
+            turnLoot = new MinMax(0, 3)
         };
         Marsh = new Feel()
         {
@@ -36,8 +48,14 @@ public class Feel
             spawn_enemy_chance = 30,
             movement_cost = 2,
             spawn_loot_chance = 10,
-            min_blocked = 1,
-            max_blocked = 2
+            blocked_sides = new MinMax(1, 2),
+
+            magicalMightEnemy = new MinMax(90, 125),
+            physicalMightEnemy = new MinMax(100, 150),
+
+            magicalMightLoot = new MinMax(20, 25),
+            physicalMightLoot = new MinMax(15, 30),
+            turnLoot = new MinMax(2, 4)
         };
         Mountain = new Feel()
         {
@@ -45,8 +63,14 @@ public class Feel
             spawn_enemy_chance = 30,
             movement_cost = 3,
             spawn_loot_chance = 10,
-            min_blocked = 1,
-            max_blocked = 3
+            blocked_sides = new MinMax(1, 3),
+
+            magicalMightEnemy = new MinMax(100, 150),
+            physicalMightEnemy = new MinMax(90, 120),
+
+            magicalMightLoot = new MinMax(20, 25),
+            physicalMightLoot = new MinMax(10, 15),
+            turnLoot = new MinMax(2, 4)
         };
         Ruins = new Feel()
         {
@@ -54,26 +78,58 @@ public class Feel
             spawn_enemy_chance = 30,
             movement_cost = 2,
             spawn_loot_chance = 30,
-            min_blocked = 1,
-            max_blocked = 4
+            blocked_sides = new MinMax(1, 4),
+
+            magicalMightEnemy = new MinMax(80, 120),
+            physicalMightEnemy = new MinMax(80, 120),
+
+            magicalMightLoot = new MinMax(20, 25),
+            physicalMightLoot = new MinMax(10, 15),
+            turnLoot = new MinMax(2, 4)
         };
     }
 
     public string name;
     public int spawn_enemy_chance;
     public int spawn_loot_chance;
-    public int blocked_sides;
     public int movement_cost;
-    private int min_blocked;
-    private int max_blocked;
+
+    /// <summary>
+    /// Blocked sides
+    /// </summary>
+    public MinMax blocked_sides;
+
+    // Enemy
+
+    /// <summary>
+    /// Magical might relative to the player
+    /// </summary>
+    public MinMax magicalMightEnemy;
+
+    /// <summary>
+    /// Physical might relative to the player
+    /// </summary>
+    public MinMax physicalMightEnemy;
+
+    // Loot
+
+    /// <summary>
+    /// Physical might from loot
+    /// </summary>
+    public MinMax physicalMightLoot;
+
+    /// <summary>
+    /// Magical might from loot
+    /// </summary>
+    public MinMax magicalMightLoot;
+
+    /// <summary>
+    /// Turn loot
+    /// </summary>
+    public MinMax turnLoot;
 
     private Feel()
     {
-    }
-
-    public void GenerateWalls()
-    {
-        blocked_sides = Random.Range(min_blocked, max_blocked + 1);
     }
 
     public static Feel RandomFeel()
@@ -91,5 +147,35 @@ public class Feel
                 return Feel.Ruins;
         }
         return Grassland;
+    }
+
+    public class MinMax
+    {
+        /// <summary>
+        /// Inclusive minimum
+        /// </summary>
+        public int min;
+
+        /// <summary>
+        /// Inclusive maximum
+        /// </summary>
+        public int max;
+
+        /// <summary>
+        /// generated number, generated on get
+        /// </summary>
+        public int Generated
+        {
+            get
+            {
+                return Random.Range(min, max + 1);
+            }
+        }
+
+        public MinMax(int min, int max)
+        {
+            this.min = min;
+            this.max = max;
+        }
     }
 }
